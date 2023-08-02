@@ -24,6 +24,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+    	<string>This app needs access to location when in the background.</string>
+    	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>turning on location services allow us to show you when salons are nearby.</string>
+    	<key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

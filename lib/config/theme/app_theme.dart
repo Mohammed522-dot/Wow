@@ -18,8 +18,8 @@ ThemeData appTheme() {
       textTheme: const TextTheme(
         bodyMedium: TextStyle(
             height: 1.3,
-            fontSize: 22,
-            color: Colors.white,
-            fontWeight: FontWeight.bold),
+            fontSize: 14,
+            color: Colors.black54,
+            fontWeight: FontWeight.normal),
       ));
 }

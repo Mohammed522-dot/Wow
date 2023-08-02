@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String appName = 'Wow';
+  static const String appName = 'wow';
   static const String login = 'Login';
   static const String fontFamily = 'Tajawal';
   static const String baseUrl = 'https://wow.arthub.ae/public/api/';

@@ -16,7 +16,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       authRepository = AuthRepository();
       await authRepository.login(event.userName,event.password )
           .then((user) {
-        emit(AuthLoaded(user));
+            if(user == null){
+              emit(ResponseError());
+            }else {
+              emit(AuthLoaded(user));
+            }
         this.user = user;
       });
     }

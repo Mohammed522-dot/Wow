@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:wow/core/utils/app_strings.dart';
+import 'package:wow/core/utils/constants.dart';
 import 'package:wow/features/presentation/blocs/auth/auth_bloc.dart';
 import 'package:wow/features/presentation/blocs/auth/auth_state.dart';
-import 'package:wow/features/presentation/screens/widgets/height_space.dart';
-import 'package:wow/features/presentation/screens/widgets/input_field.dart';
+import 'package:wow/features/presentation/screens/map_screen.dart';
 import 'package:wow/features/presentation/screens/widgets/loading_widget.dart';
-import 'package:wow/features/presentation/screens/widgets/login_btn.dart';
 import 'package:wow/features/presentation/screens/widgets/login_content.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,21 +23,18 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthLoaded) {
-          print("success");
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => RootApp()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const MapScreen()));
         } else if (state is ResponseError) {
-          // ResponseErrorLayout();
-          print("error");
+          Constants.showErrorDialog(context: context, msg: "Invalid Data");
         }
       },
       builder: (context, state) {
         if (state is AuthLoading) {
-          return const LoadingWidget(child: LoginContent());
+          return Scaffold(appBar: appBar, body:  const LoadingWidget(child: LoginContent()));
         } else {
           return  Scaffold(appBar: appBar, body:  const LoginContent());
         }
       },
     );
-
   }
 }

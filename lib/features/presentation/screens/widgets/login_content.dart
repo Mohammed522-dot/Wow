@@ -5,7 +5,6 @@ import 'package:wow/features/presentation/screens/widgets/input_field.dart';
 import 'package:wow/features/presentation/screens/widgets/login_btn.dart';
 class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
-
   @override
   State<LoginContent> createState() => _LoginContentState();
 }
@@ -63,7 +62,6 @@ class _LoginContentState extends State<LoginContent> {
             textController: password,
             label: "Password",
             icons: const Icon(Icons.lock, color: Color(0xFFDB9E82)),
-
           ),
           const HeightSpacer(myHeight: 15.0),
           LoginBtn(
@@ -72,7 +70,6 @@ class _LoginContentState extends State<LoginContent> {
             password: password,
           ),
           const SizedBox(height: 50),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
