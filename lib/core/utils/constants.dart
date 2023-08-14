@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+
 import 'package:wow/core/utils/app_colors.dart';
 
 class Constants {
@@ -26,12 +27,12 @@ class Constants {
         ));
   }
 
-  static void showToast(
-      {required String msg, Color? color, ToastGravity? gravity}) {
-    Fluttertoast.showToast(
-        toastLength: Toast.LENGTH_LONG,
-        msg: msg,
-        backgroundColor: color ?? AppColors.primary,
-        gravity: gravity ?? ToastGravity.BOTTOM);
-  }
+  // static void showToast(
+  //     {required String msg, Color? color, ToastGravity? gravity}) {
+  //   Fluttertoast.showToast(
+  //       toastLength: Toast.LENGTH_LONG,
+  //       msg: msg,
+  //       backgroundColor: color ?? AppColors.primary,
+  //       gravity: gravity ?? ToastGravity.BOTTOM);
+  // }
 }

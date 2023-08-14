@@ -27,7 +27,7 @@ class LoginBtn extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             side: const BorderSide(color:  Color(0xFFDB9E82), width: 1),
             minimumSize: const Size(double.infinity, 54),
-            backgroundColor:  Color(0xFFDB9E82)),
+            backgroundColor:  const Color(0xFFDB9E82)),
         onPressed: () {
           BlocProvider.of<AuthBloc>(context)
               .add(Login(userName.text, password.text));

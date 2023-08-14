@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,62 +8,53 @@ import 'package:wow/core/utils/app_colors.dart';
 import 'package:wow/core/utils/constants.dart';
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
-
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
-
 class _MapScreenState extends State<MapScreen> {
-  Completer<GoogleMapController> _googleMapController = Completer();
+  final Completer<GoogleMapController> _googleMapController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _defaultLatLng;
-  late LatLng _draggedLatlng;
+  late LatLng _draggedLatLng;
   String _draggedAddress = "";
-
   @override
   void initState() {
     _init();
     super.initState();
   }
-
   _init() {
     //set default latlng for camera position
-    _defaultLatLng = LatLng(11, 104);
-    _draggedLatlng = _draggedLatlng;
+    _defaultLatLng = const LatLng(11, 104);
+    // _draggedLatLng = _draggedLatLng;
     _cameraPosition = CameraPosition(
-        target: _draggedLatlng,
+        target: _defaultLatLng,
         zoom: 17.5 // number of map view
     );
-
     //map will redirect to my current location when loaded
     _gotoUserCurrentPosition();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildBody(),
-      //get a float button to click and go to current location
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _gotoUserCurrentPosition();
-          Constants.showToast(msg: _draggedLatlng.toString());
+           // Constants.showToast(msg: _defaultLatLng.toString());
         },
-        child: Icon(Icons.location_on),
+        child: const Icon(Icons.location_on),
       ),
     );
   }
-
   Widget _buildBody() {
     return Stack(
-          children : [
+           children : [
           _getMap(),
           _getCustomPin(),
           _showDraggedAddress()
         ]
     );
   }
-
   Widget _showDraggedAddress() {
     return SafeArea(
       child: Container(
@@ -73,24 +63,21 @@ class _MapScreenState extends State<MapScreen> {
         decoration: BoxDecoration(
           color: AppColors.primary,
         ),
-        child: Center(child: Text(_draggedAddress, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),)),
+        child: Center(child: Text(_draggedAddress, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600))),
       ),
     );
   }
-
   Widget _getMap() {
     return GoogleMap(
       initialCameraPosition: _cameraPosition!, //initialize camera position for map
-      mapType: MapType.normal,
+      mapType: MapType.terrain,
       onCameraIdle: () {
         //this function will trigger when user stop dragging on map
         //every time user drag and stop it will display address
-        _getAddress(_draggedLatlng);
+        _getAddress(_defaultLatLng);
       },
       onCameraMove: (cameraPosition) {
-        //this function will trigger when user keep dragging on map
-        //every time user drag this will get value of latlng
-        _draggedLatlng = cameraPosition.target;
+        _defaultLatLng = cameraPosition.target;
       },
       onMapCreated: (GoogleMapController controller) {
         //this function will trigger when map is fully loaded
@@ -101,7 +88,6 @@ class _MapScreenState extends State<MapScreen> {
       },
     );
   }
-
   Widget _getCustomPin() {
     return Center(
       child: Container(
@@ -110,7 +96,6 @@ class _MapScreenState extends State<MapScreen> {
       ),
     );
   }
-
   //get address from dragged pin
   Future _getAddress(LatLng position) async {
     //this will list down all address around the position
@@ -121,13 +106,11 @@ class _MapScreenState extends State<MapScreen> {
       _draggedAddress = addresStr;
     });
   }
-
   //get user's current location and set the map's camera to that location
   Future _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
     _gotoSpecificPosition(LatLng(currentPosition.latitude, currentPosition.longitude));
   }
-
   //go to specific position by latlng
   Future _gotoSpecificPosition(LatLng position) async {
     GoogleMapController mapController = await _googleMapController.future;
@@ -135,12 +118,10 @@ class _MapScreenState extends State<MapScreen> {
         CameraPosition(
             target: position,
             zoom: 17.5
-        )
-    ));
+        )));
     //every time that we dragged pin , it will list down the address here
     await _getAddress(position);
   }
-
   Future _determineUserCurrentPosition() async {
     LocationPermission locationPermission;
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -148,9 +129,7 @@ class _MapScreenState extends State<MapScreen> {
     if(!isLocationServiceEnabled) {
       print("user don't enable location permission");
     }
-
     locationPermission = await Geolocator.checkPermission();
-
     //check if user denied location and retry requesting for permission
     if(locationPermission == LocationPermission.denied) {
       locationPermission = await Geolocator.requestPermission();
@@ -158,13 +137,10 @@ class _MapScreenState extends State<MapScreen> {
         print("user denied location permission");
       }
     }
-
     //check if user denied permission forever
     if(locationPermission == LocationPermission.deniedForever) {
       print("user denied permission forever");
     }
-
     return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
   }
-
 }

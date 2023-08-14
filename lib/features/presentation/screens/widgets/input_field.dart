@@ -29,7 +29,6 @@ class InputField extends StatefulWidget{
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.00),
       child: TextFormField(
-
         obscureText: _passwordVisible,
         controller: widget.textController,
         autofocus: false,

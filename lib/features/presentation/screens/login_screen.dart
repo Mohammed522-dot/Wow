@@ -5,6 +5,7 @@ import 'package:wow/core/utils/constants.dart';
 import 'package:wow/features/presentation/blocs/auth/auth_bloc.dart';
 import 'package:wow/features/presentation/blocs/auth/auth_state.dart';
 import 'package:wow/features/presentation/screens/map_screen.dart';
+import 'package:wow/features/presentation/screens/root_app.dart';
 import 'package:wow/features/presentation/screens/widgets/loading_widget.dart';
 import 'package:wow/features/presentation/screens/widgets/login_content.dart';
 
@@ -13,7 +14,6 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {

@@ -11,31 +11,30 @@ dependencies:
     dio: ^4.0.6
     equatable: ^2.0.3
     flutter:
-      sdk: flutter
+     sdk: flutter
     flutter_localizations:
       sdk: flutter
     flutter_bloc: ^8.0.1
     flutter_spinkit: ^5.1.0
-    fluttertoast: ^8.0.9
+#    fluttertoast: ^8.2.2
     get_it: ^7.2.0
     http: ^0.13.4
     internet_connection_checker: ^0.0.1+4
     shared_preferences: ^2.0.15
     intl_phone_field: ^3.0.0
     cupertino_icons: ^1.0.2
-    google_maps_flutter: ^2.4.0
-    geolocator: ^9.0.2
-    geocoding: ^2.0.5
+    google_maps_flutter: ^2.2.4
+    geolocator: ^9.0.0
+    geocoding: ^2.0.4
     lottie: ^2.0.0
+    introduction_screen: ^3.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
-
   assets:
    - lang/ar.json
    - lang/en.json
